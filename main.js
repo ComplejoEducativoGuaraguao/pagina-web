@@ -1,10 +1,10 @@
 import * as THREE from 'https://esm.sh/three@0.165.0';
 import { GLTFLoader } from 'https://esm.sh/three@0.165.0/examples/jsm/loaders/GLTFLoader.js';
 
-const USUARIO_GITHUB = 'GuntaXD';
-const REPOSITORIO = 'ue-guaraguao-webpage';
-const CARPETA_BLOG = 'blog';
-const BASE_ASSETS_IMAGES_URL = 'https://guntaxd.github.io/ue-guaraguao-webpage/assets/images/';
+const USUARIO_GITHUB = "ComplejoEducativoGuaraguao";
+const REPOSITORIO = "pagina-web";
+const CARPETA_BLOG = "blog";
+const BASE_ASSETS_IMAGES_URL = "https://ComplejoEducativoGuaraguao.github.io/pagina-web/assets/images/";
 
 function normalizarUrlImagen(url) {
   if (!url || typeof url !== 'string') return '';
