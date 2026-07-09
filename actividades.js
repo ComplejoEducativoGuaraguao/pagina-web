@@ -144,7 +144,7 @@ async function cargarBlog() {
                 <div class="activity-card">
                     <img class="activity-image" src="${imagenes[0]}" alt="${post.title}">
                     <div class="activity-content">
-                        <p class="activity-meta">Actividad academica</p>
+                        <p class="activity-meta">Actividad</p>
                         <h5 class="activity-title">${post.title}</h5>
                         <p class="activity-description">${post.description}</p>
                         <a href="" class="activity-link" data-bs-toggle="modal" data-bs-target="#${modalId}">Leer mas <i class="bx bx-right-arrow-alt"></i></a>
