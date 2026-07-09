@@ -76,7 +76,10 @@ async function cargarUltimasActividadesHome() {
 
     const posts = [];
     for (const archivo of archivosJSON) {
-      const respuestaPost = await fetch(archivo.download_url);
+      const rutaRelativaPost = archivo.path
+        ? `./${archivo.path}`
+        : `./${CARPETA_BLOG}/${archivo.name}`;
+      const respuestaPost = await fetch(rutaRelativaPost);
       if (!respuestaPost.ok) continue;
       const post = await respuestaPost.json();
       posts.push(post);

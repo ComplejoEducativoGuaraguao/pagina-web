@@ -111,8 +111,11 @@ async function cargarBlog() {
 
         // 3. Recorremos cada archivo encontrado
         for (const archivo of archivosJSON) {
-            // Obtenemos el contenido real del JSON (usamos download_url para saltar el formato API)
-            const respuestaPost = await fetch(archivo.download_url);
+            // Leemos cada post por ruta relativa usando la informacion devuelta por la API
+            const rutaRelativaPost = archivo.path
+                ? `./${archivo.path}`
+                : `./${CARPETA_BLOG}/${archivo.name}`;
+            const respuestaPost = await fetch(rutaRelativaPost);
             if (!respuestaPost.ok) continue;
             const post = await respuestaPost.json();
 
