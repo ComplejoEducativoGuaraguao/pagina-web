@@ -60,6 +60,58 @@ function crearTarjetaActividadHome(post, index) {
   return col;
 }
 
+function mostrarErrorCargaActividadesHome(contenedor) {
+  contenedor.innerHTML = `
+    <div class="actividades-error-wrap w-100" role="alert" aria-live="polite">
+      <article class="actividades-error-card">
+        <div class="actividades-error-icon" aria-hidden="true">
+          <span>!</span>
+        </div>
+        <h3 class="actividades-error-title">No pudimos cargar las actividades</h3>
+        <p class="actividades-error-text mb-0">Parece que hubo un problema al consultar las publicaciones. Revisa tu conexion e intenta de nuevo.</p>
+        <div class="d-flex justify-content-center mt-4">
+          <button type="button" class="btn btn-primary px-4" id="reintentar-carga-actividades-home">Intentar nuevamente</button>
+        </div>
+      </article>
+    </div>
+  `;
+
+  const botonReintentar = document.getElementById('reintentar-carga-actividades-home');
+  if (botonReintentar) {
+    botonReintentar.addEventListener('click', () => {
+      cargarUltimasActividadesHome();
+    }, { once: true });
+  }
+}
+
+function mostrarSinActividadesHome(contenedor) {
+  contenedor.innerHTML = `
+    <div class="actividades-vacio-wrap w-100" role="status" aria-live="polite">
+      <article class="actividades-vacio-card">
+        <div class="actividades-vacio-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 10v6"></path>
+            <path d="M12 7h.01"></path>
+          </svg>
+        </div>
+        <h3 class="actividades-vacio-title">No hay actividades publicadas por ahora</h3>
+        <p class="actividades-vacio-text mb-0">Estamos preparando nuevas publicaciones para esta seccion. Vuelve pronto para ver las proximas actividades academicas.</p>
+        <div class="d-flex justify-content-center mt-4">
+          <button type="button" class="btn btn-outline-primary px-4" id="recargar-actividades-home">Actualizar</button>
+        </div>
+      </article>
+    </div>
+  `;
+
+  const botonActualizar = document.getElementById('recargar-actividades-home');
+  if (botonActualizar) {
+    botonActualizar.addEventListener('click', () => {
+      cargarUltimasActividadesHome();
+    }, { once: true });
+  }
+}
+
 async function cargarUltimasActividadesHome() {
   const contenedor = document.getElementById('home-actividades-grid');
   if (!contenedor) return;
@@ -89,11 +141,7 @@ async function cargarUltimasActividadesHome() {
     contenedor.innerHTML = '';
 
     if (!ultimosCuatro.length) {
-      contenedor.innerHTML = `
-        <div class="text-center py-4">
-          <p class="mb-0">No hay actividades publicadas por ahora.</p>
-        </div>
-      `;
+      mostrarSinActividadesHome(contenedor);
       return;
     }
 
@@ -118,11 +166,7 @@ async function cargarUltimasActividadesHome() {
     }
   } catch (error) {
     console.error('Error cargando actividades de inicio:', error);
-    contenedor.innerHTML = `
-      <div class="text-center py-4">
-        <p class="mb-0">No se pudieron cargar las actividades en este momento.</p>
-      </div>
-    `;
+    mostrarErrorCargaActividadesHome(contenedor);
   }
 }
 
