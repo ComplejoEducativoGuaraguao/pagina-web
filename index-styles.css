@@ -33,7 +33,7 @@
 
 .home-page .topbar-brand {
     font-size: 1.3rem;
-    font-weight: 800;
+    /* font-weight: 800; */
     letter-spacing: 0.015em;
     gap: 0.5rem;
     color: #ffffff;
